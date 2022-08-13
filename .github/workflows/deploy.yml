@@ -37,7 +37,9 @@ jobs:
         name: Update deploy branch
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@main
+        - uses: actions/checkout@master
+        - uses: Embraser01/update-git-branch-action@v1.0.0
+          if: github.ref == 'refs/heads/master'
           with:
             branch: deploy
             force: 1 # To push-force to the branch
