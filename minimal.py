@@ -1,4 +1,4 @@
-"""Minimal Flask Application"""
+"""Minimal Flask Application 2"""
 
 from flask import Flask
 
