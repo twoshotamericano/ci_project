@@ -8,11 +8,11 @@ on:
 
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  # build:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v3
+  #   steps:
+  #     - uses: actions/checkout@v3
 
       # - name: setup Python 3.7
       #   uses: actions/setup-python@v1
@@ -24,12 +24,23 @@ jobs:
       # - name: lint
       #   run: make lint
 
-      - name: Push
-        uses: s0/git-publish-subdir-action@develop
-        env:
-          REPO: self
-          BRANCH: master # The branch name where you want to push the assets
-          FOLDER: . # The directory where your assets are generated
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: "Build: ({sha}) {msg}" # The commit message
+      # - name: Push
+      #   uses: s0/git-publish-subdir-action@develop
+      #   env:
+      #     REPO: self
+      #     BRANCH: deploy # The branch name where you want to push the assets
+      #     FOLDER: . # The directory where your assets are generated
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
+      #     MESSAGE: "Build: ({sha}) {msg}" # The commit message
 
+      updateBranch:
+        name: Update deploy branch
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@master
+        - uses: Embraser01/update-git-branch-action@v1.0.0
+          if: github.ref == 'refs/heads/master'
+          with:
+            branch: deploy
+            force: 1 # To push-force to the branch
+            githubToken: ${{ secrets.GITHUB_TOKEN}} # Github Token
