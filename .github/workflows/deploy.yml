@@ -43,4 +43,4 @@ jobs:
           with:
             branch: deploy
             force: 1 # To push-force to the branch
-            githubToken: ${{ secrets.PAT_TOKEN }} # Github Token
+            githubToken: ${{ secrets.GITHUB_TOKEN}} # Github Token
