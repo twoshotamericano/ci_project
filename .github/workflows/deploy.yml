@@ -6,8 +6,8 @@ on:
   pull_request:
     branches: ['main']
 
-with:
-  new_branch: master
+
+new_branch: master
 
 jobs:
   build:
